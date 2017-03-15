@@ -1,6 +1,6 @@
 ## What this project includes
 
-- Custom User model (inhering AbstractUser model)
+- Custom User model (inheriting AbstractUser model)
 - Authy Phone Verification API for phone number verification of user.
 
 ## Installation
