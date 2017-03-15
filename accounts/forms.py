@@ -3,7 +3,7 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.contrib.auth.password_validation import validate_password
 
-from .models import User, now_plus_48_hours
+from .models import User
 
 
 class RegisterForm(forms.ModelForm):

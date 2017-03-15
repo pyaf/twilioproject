@@ -1,4 +1,4 @@
-from datetime import datetime, timezone, timedelta
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin, AbstractUser
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -7,24 +7,12 @@ from django.utils.translation import ugettext_lazy as _
 from .manager import UserManager
 
 
-
-def now_plus_48_hours():
-    return datetime.now(tz=timezone.utc) + timedelta(hours=48)
-
-
-def abstract_user_field(name):
-    for f in AbstractUser._meta.fields:
-        if f.name == name:
-            return f
-
-
-
 class User(AbstractBaseUser, PermissionsMixin):
-    username = abstract_user_field('username')
+    username = models.CharField(_('username'), max_length=130, unique=True)
     full_name = models.CharField(_('full name'), max_length=130, blank=True)
-    is_staff = abstract_user_field('is_staff')
-    is_active = abstract_user_field('is_active')
-    date_joined = abstract_user_field('date_joined')
+    is_staff = models.BooleanField(_('is_staff'), default=False)
+    is_active = models.BooleanField(_('is_active'), default=True)
+    date_joined = models.DateField(_("date_joined"), default=date.today)
     phone_number_verified = models.BooleanField(default=False)
     change_pw = models.BooleanField(default=True)
     phone_number = models.BigIntegerField(unique=True)
