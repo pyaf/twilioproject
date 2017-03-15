@@ -85,7 +85,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHY_KEY = 'zJ5JU9ucu8yQaL1pD9pJGYd32VT7Lk8A'
+AUTHY_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
