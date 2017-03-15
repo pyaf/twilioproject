@@ -2,3 +2,4 @@ venv
 *.pyc
 staticfiles
 .env
+api/api_credentials.py

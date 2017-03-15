@@ -28,11 +28,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_number_verified = models.BooleanField(default=False)
     change_pw = models.BooleanField(default=True)
     phone_number = models.IntegerField(unique=True)
+    country_code = models.IntegerField()
 
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['full_name', 'phone_number']
+    REQUIRED_FIELDS = ['full_name', 'phone_number', 'country_code']
 
     class Meta:
         ordering = ('username',)

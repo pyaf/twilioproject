@@ -1,5 +1,12 @@
+authy==2.1.2
 dj-database-url==0.4.1
 Django==1.10.4
 gunicorn==19.6.0
+httplib2==0.10.3
 psycopg2==2.6.2
+pytz==2016.10
+requests==2.13.0
+simplejson==3.10.0
+six==1.10.0
+twilio==4.4.0
 whitenoise==3.2

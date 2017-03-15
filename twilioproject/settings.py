@@ -40,6 +40,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'twilioproject.urls'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 TEMPLATES = [
     {
@@ -83,6 +84,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHY_KEY = 'zJ5JU9ucu8yQaL1pD9pJGYd32VT7Lk8A'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
