@@ -27,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = abstract_user_field('date_joined')
     phone_number_verified = models.BooleanField(default=False)
     change_pw = models.BooleanField(default=True)
-    phone_number = models.IntegerField(unique=True)
+    phone_number = models.BigIntegerField(unique=True)
     country_code = models.IntegerField()
 
     objects = UserManager()
