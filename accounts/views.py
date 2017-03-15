@@ -10,7 +10,7 @@ import json
 from .forms import RegisterForm, LoginForm, PhoneVerificationForm
 from .authy_api import send_verfication_code, verify_sent_code
 
-class IndexView(SuccessMessageMixin, FormView):
+class RegisterView(SuccessMessageMixin, FormView):
     template_name = 'index.html'
     form_class = RegisterForm
     success_message = "One-Time password sent to your registered mobile number.\
