@@ -39,10 +39,11 @@
       </div>
       {% endif %}
 
-      <form class="form-inline" id="login_form" method="POST" action="" >
+      <form class="form-inline" id="login_form" method="POST" action="/verify/" >
         <h3>Confirm your phone number</h3>
         <br>
         {% csrf_token %}
+        <input type='hidden' name='username' value='{{user.username}}' />
 
         <div class="form-group{% if form.one_time_password.errors %} has-error{% endif %}">
           <label class="control-label" for="id_one_time_password">One Time Password</label>

@@ -17,6 +17,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     change_pw = models.BooleanField(default=True)
     phone_number = models.BigIntegerField(unique=True)
     country_code = models.IntegerField()
+    two_factor_auth = models.BooleanField(default=False)
 
     objects = UserManager()
 
