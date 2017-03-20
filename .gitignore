@@ -3,3 +3,4 @@ venv
 staticfiles
 .env
 api/api_credentials.py
+db.sqlite3

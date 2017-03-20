@@ -2,6 +2,7 @@ from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth import authenticate
 
 from .models import User
 
@@ -50,7 +51,7 @@ class PhoneVerificationForm(forms.Form):
     one_time_password = forms.IntegerField()
 
     class Meta:
-        fields = ['one_time_password']
+        fields = ['one_time_password',]
 
 
 class LoginForm(forms.Form):
@@ -59,3 +60,17 @@ class LoginForm(forms.Form):
 
     class Meta:
         fields = ['username','password']
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if not user:
+            raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
+        return self.cleaned_data
+
+    def login(self, request):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        return user
