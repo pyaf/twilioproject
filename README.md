@@ -2,6 +2,7 @@
 
 - Custom User model (inheriting AbstractUser model)
 - Authy Phone Verification API for phone number verification of user.
+- Two-factor authentication for users.
 
 ## Installation
 
