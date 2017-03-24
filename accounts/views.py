@@ -11,8 +11,10 @@ from .forms import RegisterForm, LoginForm, PhoneVerificationForm
 from .authy_api import send_verfication_code, verify_sent_code
 from .models import User
 
+
 class IndexView(TemplateView):
     template_name = 'index.html'
+
 
 class RegisterView(SuccessMessageMixin, FormView):
     template_name = 'register.html'
@@ -40,25 +42,23 @@ class RegisterView(SuccessMessageMixin, FormView):
         if data['success'] == False:
             messages.add_message(self.request, messages.ERROR,
                             data['message'])
-            return redirect('/dashboard')
+            return redirect('/register')
 
         else:
             kwargs = {'user': user}
             self.request.method = 'GET'
             return PhoneVerificationView(self.request, **kwargs)
 
-        # return super().form_valid(form)
-
 
 def PhoneVerificationView(request, **kwargs):
     template_name = 'phone_confirm.html'
 
     if request.method == "POST":
+        username = request.POST['username']
+        user = User.objects.get(username=username)
         form = PhoneVerificationForm(request.POST)
         if form.is_valid():
-            username = request.POST['username']
             verification_code = request.POST['one_time_password']
-            user = User.objects.get(username=username)
             response = verify_sent_code(verification_code, user)
             print(response.text)
             data = json.loads(response.text)
@@ -72,11 +72,21 @@ def PhoneVerificationView(request, **kwargs):
             else:
                 messages.add_message(request, messages.ERROR,
                                 data['message'])
-                return redirect('/login')
+                return render(request, template_name, {'user':user})
+        else:
+            context = {
+                'user': user,
+                'form': form,
+            }
+            return render(request, template_name, context)
 
     elif request.method == "GET":
-        user = kwargs['user']
-        return render(request, template_name, {'user': user})
+        try:
+            user = kwargs['user']
+            return render(request, template_name, {'user': user})
+        except:
+            return HttpResponse("Not Allowed")
+
 
 class LoginView(FormView):
     template_name = 'login.html'
@@ -98,7 +108,6 @@ class LoginView(FormView):
             login(self.request, user)
             return redirect('/dashboard')
         else:
-            print("two factor")
             try:
                 response = send_verfication_code(user)
                 pass

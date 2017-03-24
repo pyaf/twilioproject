@@ -33,7 +33,6 @@ class RegisterForm(forms.ModelForm):
 
     def clean_phone_number(self):
         phone_number = self.data.get('phone_number')
-        # print(User.objects.filter(phone_number=phone_number))
         if User.objects.filter(phone_number=phone_number).exists():
             raise forms.ValidationError(
                 _("Another user with this phone number already exists"))
@@ -52,6 +51,7 @@ class PhoneVerificationForm(forms.Form):
 
     class Meta:
         fields = ['one_time_password',]
+
 
 
 class LoginForm(forms.Form):
